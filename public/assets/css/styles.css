@@ -1,0 +1,140 @@
+/*****************************************
+************  Mobile first ***************
+*****************************************/
+
+/*----------------------
+------  Generals  ------
+----------------------*/
+
+* {
+    box-sizing: border-box;
+}
+  
+html {
+    scroll-behavior: smooth;
+    font-size: 62.5%;
+}
+
+body {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+.hide {
+    display: none;
+    visibility: hidden;
+}
+
+
+/*----------------------
+------  Header  --------
+-----------------------*/
+
+h1 {
+    text-align: center;
+    font-size: 3.5rem;
+    font-style: italic;
+    font-weight: 600;
+    text-shadow: 0.5rem 0.5rem 1rem red;
+    margin-top: 1.5rem;
+}
+
+h1 a {
+    color: blue;
+}
+
+.menu {
+    position: absolute;
+}
+
+.menu_hide {
+    top: 20px;
+    right: 20px;
+}
+
+.menu_show {
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 1.5rem;
+}
+
+.toggle_nav {
+    font-size: 3rem;
+    text-decoration: none;
+    background: none;
+    border: none;
+}
+
+#open_nav {
+    color: black;
+}
+
+#close_nav {
+    color: white;
+}
+
+nav {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+}
+
+nav a {
+    color: white;
+    font-size: 2.5rem;
+    margin-bottom: 2rem;
+}
+
+/* Header's tablet version */
+@media screen and (min-width: 768px) {
+    header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.25);
+    }
+
+    h1 {
+        margin: 3rem 1rem 3rem 4rem;
+    }
+
+    .menu {
+        margin: 1rem;
+    }
+
+    .menu_show {
+        position: inherit;
+        background-color: inherit;
+        padding: 0;
+    }
+
+    nav {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    nav a {
+        color: black;
+        margin-right: 2rem;
+        margin-bottom: 0;
+        font-size: 2rem;
+        transition: all ease-in-out 0.25s;
+    }
+
+    nav a:hover {
+        transform: scale(1.2);
+    }
+}
+
+/* Header's desktop version */
+@media screen and (min-width: 1024px) {
+    header {
+        justify-content: space-around;
+    }
+}

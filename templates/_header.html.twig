@@ -1,0 +1,28 @@
+<header>
+	{# Website name #}
+	<h1>
+		<a href="/">
+			Infos sport
+		</a>
+	</h1>
+	<div class="menu" id="menu">
+		<button type="button" class="toggle_nav" id="open_nav">
+			<i class="fas fa-bars"></i>
+		</button>
+		{# Buttons to toggle menu -- For mobile version #}
+		<button type="button" class="toggle_nav" id="close_nav">
+			<i class="fas fa-chevron-left"></i>
+		</button>
+		<nav id="nav">
+			<a href="">Ahhhh</a>
+			<a href="">Béééé</a>
+			<a href="">Céééé</a>
+			{% if user %}
+				<a href="">Mon compte</a>
+			{% else %}
+				<a href="">Se connecter</a>
+				<a href="">S'enregistrer</a>
+			{% endif %}
+		</nav>
+	</div>
+</header>
