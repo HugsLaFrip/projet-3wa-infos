@@ -12,7 +12,7 @@ composer install
 
 ## Préparer la base de données
 
-Spécifier vos informations de connexion à votre base de données dans le fichier .env
+Spécifier vos informations de connexion à votre base de données dans le fichier ***.env***
 
 Remplacer :
   * **db_user** => identifiant de connexion à votre base de données
