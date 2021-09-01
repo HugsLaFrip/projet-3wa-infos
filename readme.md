@@ -12,7 +12,7 @@ composer install
 
 ## Préparer la base de données
 
-Spécifier vos informations de connexion à votre base de données dans le fichier ***.env***
+Spécifiez vos informations de connexion à votre base de données dans le fichier ***.env***
 
 Remplacer :
   * **db_user** => identifiant de connexion à votre base de données
@@ -23,6 +23,10 @@ Remplacer :
 DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=5.7"
 ```
 
+Lancez ensuite cette suite de commande pour créer et remplir votre base de données
+
 ```bash
 php bin/console doctrine:database:create
+php bin/console doctrine:migrations:migrate
+php bin/console doctrine:fixtures:load
 ```
