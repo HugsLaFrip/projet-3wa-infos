@@ -17,6 +17,6 @@ Spécifier vos informations de connexion à votre base de données dans le fichi
 ```bash
 ```
 
-```bash
+```php
 php bin/console doctrine:database:create
 ```
