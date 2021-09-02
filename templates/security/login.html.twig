@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<h2 class="h3 mb-3 font-weight-normal">Se connecter</h2>
+
+	{% if error %}
+		<div class="flash failure">{{ error }}</div>
+	{% endif %}
+
+	{{ form_start(form) }}
+	{{ form_widget(form) }}
+	<button type="submit" class="btn_submit">Se connecter</button>
+	{{ form_end(form) }}
+{% endblock %}

@@ -13,9 +13,6 @@ class HomeController extends AbstractController
      */
     public function index(): Response
     {
-        return $this->render('home/index.html.twig', [
-            // return user if logged in, false otherwise
-            'user' => $this->getUser() ? $this->getUser() : false,
-        ]);
+        return $this->render('home/index.html.twig', []);
     }
 }

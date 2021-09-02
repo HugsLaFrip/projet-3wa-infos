@@ -14,7 +14,15 @@
 	</head>
 	<body>
 		{% include "_header.html.twig" %}
-		{% block body %}{% endblock %}
+		<main>
+			{# Show flash messages if any #}
+			{% for key, messages in app.flashes %}
+				{% for m in messages %}
+					<div class="flash {{ key }}">{{ m }}</div>
+				{% endfor %}
+			{% endfor %}
+			{% block body %}{% endblock %}
+		</main>
 		{% include "_footer.html.twig" %}
 		<script src="assets/js/jquery.min.js"></script>
 		<script type="module" src="assets/js/index.js"></script>

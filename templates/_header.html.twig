@@ -17,11 +17,12 @@
 			<a href="">Ahhhh</a>
 			<a href="">Béééé</a>
 			<a href="">Céééé</a>
-			{% if user %}
+			{% if app.user %}
 				<a href="">Mon compte</a>
+				<a href="{{ path('security_logout') }}">Se déconnecter</a>
 			{% else %}
-				<a href="">Se connecter</a>
-				<a href="">S'enregistrer</a>
+				<a href="{{ path('security_register') }}">Créer son compte</a>
+				<a href="{{ path('security_login') }}">Se connecter</a>
 			{% endif %}
 		</nav>
 	</div>
