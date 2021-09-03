@@ -2,12 +2,12 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-		<title>Infos sports</title>
-		<meta name="description" content="Grafiti dans ma ville">
+		<title>Infos OM</title>
+		<meta name="description" content="Toutes les infos de l'Olympique de Marseille">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
 		{% block stylesheets %}
-			<link rel="stylesheet" href="assets/css/all.min.css">
-			<link rel="stylesheet" href="assets/css/styles.css">
+			<link rel="stylesheet" href="/assets/css/all.min.css">
+			<link rel="stylesheet" href="/assets/css/styles.css">
 		{% endblock %}
 
 		{% block javascripts %}{% endblock %}
@@ -24,7 +24,7 @@
 			{% block body %}{% endblock %}
 		</main>
 		{% include "_footer.html.twig" %}
-		<script src="assets/js/jquery.min.js"></script>
-		<script type="module" src="assets/js/index.js"></script>
+		<script src="/assets/js/jquery.min.js"></script>
+		<script type="module" src="/assets/js/index.js"></script>
 	</body>
 </html>

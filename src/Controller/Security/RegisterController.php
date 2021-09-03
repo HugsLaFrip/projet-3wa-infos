@@ -15,21 +15,13 @@ class RegisterController extends AbstractController
     /**
      * @Route("/creer-un-compte", name="security_register")
      */
-    public function index(
-        Request $request,
-        EntityManagerInterface $manager,
-        UserPasswordHasherInterface $encoder
-    ): Response {
+    public function index(Request $request,  EntityManagerInterface $manager): Response
+    {
         $form = $this->createForm(RegisterType::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $user = $form->getData();
-
-            // hash the user's password
-            $user->setPassword($encoder->hashPassword($user, $user->getPassword()));
-
-            $manager->persist($user);
+            $manager->persist($form->getData());
 
             $manager->flush();
 
@@ -40,6 +32,7 @@ class RegisterController extends AbstractController
 
         return $this->render('security/register.html.twig', [
             'form' => $form->createView(),
+            'button_label' => 'Créer son compte'
         ]);
     }
 }

@@ -41,7 +41,7 @@ class LoginFormAuthenticator extends AbstractGuardAuthenticator
         $user = $userProvider->loadUserByIdentifier($credentials['email']);
 
         if (!$user) {
-            throw new AuthenticationException("Votre identifiant ou mot de passe est incorrect");
+            throw new AuthenticationException("Identifiant ou mot de passe incorrect");
         }
 
         return $user;
@@ -53,7 +53,7 @@ class LoginFormAuthenticator extends AbstractGuardAuthenticator
         if ($this->encoder->isPasswordValid($user, $credentials['password'])) {
             return true;
         }
-        throw new AuthenticationException("Votre identifiant ou mot de passe est incorrect");
+        throw new AuthenticationException("Identifiant ou mot de passe incorrect");
     }
 
     // Set what happens if authentication fail

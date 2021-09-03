@@ -29,7 +29,8 @@ class LoginController extends AbstractController
         return $this->render('security/login.html.twig', [
             'form' => $form->createView(),
             'last_username' => $lastUsername,
-            'error' => $request->attributes->get('login.error')
+            'error' => $request->attributes->get('login.error'),
+            'button_label' => 'Se connecter'
         ]);
     }
 
