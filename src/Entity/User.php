@@ -36,16 +36,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @var string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Regex(
-     *  pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-])(?!.*?[\s]).{8,}$/",
+     *  pattern="/^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&+*-])(?!.*?[\s]).{8,}$/",
      *  message="Le mot de passe doit contenir une majuscule, une minuscule, un chiffre et un caractère spécial. Il doit faire un minimum de 8 caractères et ne pas contenir d'espaces"
      * )
      */
     private $password;
-
-    /**
-     * @ORM\OneToMany(targetEntity=Article::class, mappedBy="user", orphanRemoval=true)
-     */
-    private $articles;
 
     /**
      * @ORM\Column(type="string", length=20)
@@ -53,11 +48,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @Assert\Length(min=4, minMessage="Le pseudo doit faire un minimum de 4 caractères")
      */
     private $pseudo;
-
-    public function __construct()
-    {
-        $this->articles = new ArrayCollection();
-    }
 
     public function getId(): ?int
     {
@@ -146,36 +136,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
-    }
-
-    /**
-     * @return Collection|Article[]
-     */
-    public function getArticles(): Collection
-    {
-        return $this->articles;
-    }
-
-    public function addArticle(Article $article): self
-    {
-        if (!$this->articles->contains($article)) {
-            $this->articles[] = $article;
-            $article->setUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeArticle(Article $article): self
-    {
-        if ($this->articles->removeElement($article)) {
-            // set the owning side to null (unless already changed)
-            if ($article->getUser() === $this) {
-                $article->setUser(null);
-            }
-        }
-
-        return $this;
     }
 
     public function getPseudo(): ?string

@@ -1,7 +1,7 @@
 class Menu {
     // Set header's CSS class based on window width
     setMenuClass() {
-        if ($(window).width() >= 768) {
+        if ($(window).width() >= 1024) {
             $('#menu').addClass('menu_show');
             $('#open_nav').addClass('hide');
             $('#close_nav').addClass('hide');

@@ -1,16 +1,30 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="background"></div>
-	<h2 class="title">Retrouvez les dernières infos de votre club préféré</h2>
-	<section class="home_section">
-		<div class="container">
-			{% for a in articles %}
-				<article>
-					{# <img src="/assets/img/{{ a.file }}" alt="" class="img_article"> #}
-					<h3>{{ a.title }}</h3>
-				</article>
-			{% endfor %}
-		</div>
-	</section>
+	<div class="container">
+		<h2>Le site des passionnés de l'Olympique de Marseille</h2>
+		{% for g in groups %}
+			<h4 class="group">{{ g.name }}</h4>
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Categorie</th>
+						<th>Discussions</th>
+						<th>Plus récent</th>
+					</tr>
+				</thead>
+				<tbody>
+					{% for c in g.categories %}
+						<tr>
+							<td>
+								<a href="{{ path('categories', {'slug': c.slug}) }}">{{ c.name }}</a>
+							</td>
+							<td>{{ c.discussions|length }}</td>
+							<td>test</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		{% endfor %}
+	</div>
 {% endblock %}

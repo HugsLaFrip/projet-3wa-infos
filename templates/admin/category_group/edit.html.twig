@@ -1,0 +1,11 @@
+{% extends 'admin/_nav_admin.html.twig' %}
+
+{% block body_admin %}
+	<h2>Modifier groupe de catégorie "{{ category_group.name }}"</h2>
+	<div class="buttons">
+		{% include "_return.html.twig" with {'route': 'category_group_index'} %}
+		{{ include('admin/category_group/_delete_form.html.twig') }}
+	</div>
+
+	{{ include('admin/category_group/_form.html.twig', {'button_label': 'Modifier'}) }}
+{% endblock %}

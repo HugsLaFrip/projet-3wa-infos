@@ -35,10 +35,9 @@ img {
 
 /* Class used for flash messages */
 .flash {
-    width: 100%;
-    margin: 0 auto 2rem;
-    border-radius: 10px;
-    padding: 1.5rem 1.8rem;
+    width: 90%;
+    margin: auto;
+    padding: 2rem 0;
     text-align: center;
     font-size: 1.8rem;
     color: white;
@@ -52,10 +51,16 @@ img {
     background-color: red;
 }
 
+@media screen and (min-width: 768px) {
+    .flash {
+        width: 80%;
+    }
+}
+
 @media screen and (min-width: 1024px) {
     .flash {
         width: 75%;
-        max-width: 900px;
+        max-width: 1000px;
     }
 }
 
@@ -66,6 +71,7 @@ img {
 header {
     border-bottom: 1px solid rgba(0, 0, 0, 0.25);
     z-index: 100;
+    background-color: rgb(30, 30, 30);
 }
 
 h1 {
@@ -73,12 +79,13 @@ h1 {
     font-size: 4rem;
     font-style: italic;
     font-weight: 600;
-    text-shadow: 0.5rem 0.5rem 1rem red;
-    margin-top: 1.5rem;
+    text-shadow: 0.5rem 0.5rem 1rem lightskyblue;
+    padding-top: 1.5rem;
+    margin: 0;
 }
 
 h1 a {
-    color: blue;
+    color: white;
 }
 
 .menu {
@@ -118,6 +125,7 @@ nav {
     display: flex;
     flex-direction: column;
     text-align: right;
+    background-color: rgb(30, 30, 30);
 }
 
 nav a {
@@ -132,6 +140,17 @@ nav a {
         display: flex;
         justify-content: space-between;
         align-items: center;
+    }
+
+    h1 {
+        margin: 2rem 0 2rem 2rem;
+    }
+}
+
+/* Header's desktop version */
+@media screen and (min-width: 1024px) {
+    header {
+        justify-content: space-around;
     }
 
     h1 {
@@ -154,7 +173,6 @@ nav a {
     }
 
     nav a {
-        color: black;
         margin-right: 2rem;
         margin-bottom: 0;
         font-size: 2rem;
@@ -166,11 +184,26 @@ nav a {
     }
 }
 
-/* Header's desktop version */
-@media screen and (min-width: 1024px) {
-    header {
-        justify-content: space-around;
-    }
+/*----------------------
+-----  Admin nav  ------
+----------------------*/
+
+.nav_admin {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 50%;
+    padding: 2rem 3rem;
+}
+
+.nav_admin a {
+    margin-right: 0;
+    margin-bottom: 2rem;
+}
+
+.nav_admin a:last-child {
+    margin-bottom: 0;
 }
 
 
@@ -185,40 +218,14 @@ nav a {
     right: 0;
     bottom: 0;
     background-image: url("/assets/img/background.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
+    background-repeat: repeat;
     z-index: -10;
 }
 
-.title {
-    font-size: 4rem;
-    margin-top: 6rem;
-    padding: 0 5%;
-}
-
-.home_section {
-    position: absolute;
-    top: 75%;
-    right: 0;
-    left: 0;
-    background-color: black;
-}
-
-article {
-    position: relative;
-    padding: 2rem;
-    margin-bottom: 2rem;
-    background-color: rgba(255, 255, 255, 0.9);
-    border-radius: 10px;
-    border: 1px solid white;
-}
-
-.img_article {
-    position: absolute;
-    top: 0;
-    right: 0;
-    left: 0;
-    bottom: 0;
+.group {
+    font-size: 3rem;
+    padding: 1rem;
+    color: white;
 }
 
 /*----------------------
@@ -230,6 +237,7 @@ article {
     width: 90%;
     margin: auto;
     padding: 2rem 0;
+    background-color: rgb(30, 30, 30);
 }
 
 @media screen and (min-width: 768px) {
@@ -246,9 +254,12 @@ article {
 }
 
 h2 {
-    font-size: 3rem;
+    font-size: 4rem;
     font-weight: 500;
     text-align: center;
+    margin-top: 6rem;
+    padding: 0 5%;
+    color: white;
     overflow-wrap: break-word;
 }
 
@@ -261,6 +272,11 @@ form {
     margin: 0 0 2rem;
 }
 
+.form {
+    width: 90%;
+    margin: 0 auto 2rem;
+}
+
 /* Style for label/input group */
 .form_row {
     margin-bottom: 2rem;
@@ -269,6 +285,7 @@ form {
 label {
     display: block;
     margin-bottom: 0.5rem;
+    color: white;
 }
 
 label.required:after {
@@ -332,6 +349,13 @@ label.required:after {
     border: 1px solid #062486;
 }
 
+.btn_discussion {
+    background-color: lightgrey;
+    border-radius: 0;
+    border: 1px solid grey;
+    color: black;
+}
+
 .buttons {
     display: flex;
     align-items: center;
@@ -355,26 +379,54 @@ table .buttons {
 --------  Table  ----------
 -------------------------*/
 
-table {
-    width: 100%;
+.table {
+    width: 90%;
     border-collapse: collapse;
-    margin: 4rem 0 2rem;
+    margin: 4rem auto 2rem;
 }
 
-tr {
-    border-bottom: 1px solid grey;
+.table thead {
+    font-size: 2rem;
+    background-color: rgb(11, 145, 223);
+    color: white;
 }
 
-tr:first-child {
-    border-top: 1px solid grey;
+.table tbody tr {
+    background-color: white;
+    color: black;
 }
 
-tr:nth-child(even) {
-    background-color: lightgrey;
+.table tbody tr a {
+    color: black;
+}
+
+.table tbody tr td:first-child {
+    font-weight: bold;
+}
+
+.table tbody tr td {
+    border-right: 1px solid rgb(11, 145, 223);
+}
+
+.table tbody tr:nth-child(even) td {
+    border-right: 1px solid white;
+}
+
+.table tbody tr td:last-child {
+    border-right: none;
+}
+
+.table tbody tr:nth-child(even) {
+    background-color: rgb(11, 145, 223);
+    color: white;
+}
+
+.table tbody tr:nth-child(even) a {
+    color: white;
 }
 
 th, td {
-    padding: 1rem;
+    padding: 1.5rem;
     text-align: center;
     vertical-align: middle;
 }

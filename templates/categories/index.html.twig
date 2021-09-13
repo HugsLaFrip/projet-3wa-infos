@@ -1,0 +1,32 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container client_view">
+		<h2>{{ category.name }}</h2>
+		<a href="" class="btn btn_discussion">Nouvelle discussion</a>
+		<table class="table">
+			<thead>
+				<tr>
+					<th>Discussion</th>
+					<th>Commentaires</th>
+					<th>Plus récent</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for d in category.discussions %}
+					<tr>
+						<td>
+							<a href="{{ path('categories', {'slug': c.slug}) }}">{{ c.name }}</a>
+						</td>
+						<td>52.5k</td>
+						<td>test</td>
+					</tr>
+				{% else %}
+					<tr>
+						<td colspan="3">Aucune discussion trouvé</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

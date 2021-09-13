@@ -1,0 +1,11 @@
+{% extends 'admin/_nav_admin.html.twig' %}
+
+{% block body_admin %}
+	<h2>Création d'un nouveau groupe de catégorie</h2>
+
+	<div class="buttons">
+		{% include "_return.html.twig" with {'route': 'category_group_index'} %}
+	</div>
+
+	{{ include('admin/category_group/_form.html.twig', {'button_label': 'Créer'}) }}
+{% endblock %}

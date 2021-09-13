@@ -1,0 +1,11 @@
+{% extends 'admin/_nav_admin.html.twig' %}
+
+{% block body_admin %}
+	<h2>Créer une nouvelle catégorie</h2>
+
+	<div class="buttons">
+		{% include "_return.html.twig" with {'route': 'category_index'} %}
+	</div>
+
+	{{ include('admin/category/_form.html.twig') }}
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<nav class="nav_admin">
+		<a href="{{ path('category_group_index') }}">Groupe de catégorie</a>
+		<a href="{{ path('category_index') }}">Catégorie</a>
+	</nav>
+	<div class="container">
+		{% block body_admin %}{% endblock %}
+	</div>
+{% endblock %}
