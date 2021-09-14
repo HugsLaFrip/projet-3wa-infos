@@ -30,3 +30,12 @@ php bin/console doctrine:database:create
 php bin/console doctrine:migrations:migrate
 php bin/console doctrine:fixtures:load
 ```
+
+Démarrer votre serveur local
+
+```bash
+php -S localhost:8000 -t public
+```
+
+Ouvrez votre navigateur favori et saisissez l'URL " localhost:8000 "
+Enjoy !
