@@ -21,7 +21,20 @@ class RegisterController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
 
-            $manager->persist($form->getData());
+            $account = $form->getData();
+            $avatar = $form->get('_avatar')->getData();
+
+            if ($avatar) {
+                $originalName = pathinfo($avatar->getClientOriginalName(), PATHINFO_FILENAME);
+
+                $fileName = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $originalName), '-')) . '-' . uniqid() . '.' . $avatar->guessExtension();
+
+                $avatar->move($this->getParameter('files'), $fileName);
+
+                $account->setAvatar($fileName);
+            }
+
+            $manager->persist($account);
 
             $manager->flush();
 

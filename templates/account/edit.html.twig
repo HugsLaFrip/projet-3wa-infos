@@ -1,0 +1,17 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+	<div class="container">
+		<h2>Modifier mon compte</h2>
+		<div class="buttons">
+			<a href="{{ path('account', {'pseudo': app.user.pseudo}) }}" class="btn btn_return">
+				<i class="fas fa-arrow-left"></i>
+			</a>
+		</div>
+		{{ form_start(form, {'attr': {'class': 'form'}}) }}
+		{{ form_widget(form) }}
+		<button class="btn btn_submit">Modifier</button>
+		<img src="/assets/img/{{ form.vars.value.avatar }}" alt="avatar">
+		{{ form_end(form) }}
+	</div>
+{% endblock %}

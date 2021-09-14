@@ -1,9 +1,9 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-	<div class="container client_view">
+	<div class="container">
 		<h2>{{ category.name }}</h2>
-		<a href="" class="btn btn_discussion">Nouvelle discussion</a>
+		<a href="{{ path('discussion_new', {'categorie': category.slug}) }}" class="btn btn_discussion">Nouvelle discussion</a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -16,9 +16,13 @@
 				{% for d in category.discussions %}
 					<tr>
 						<td>
-							<a href="{{ path('categories', {'slug': c.slug}) }}">{{ c.name }}</a>
+							<a href="{{ path('discussion_show', {'categorie': category.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
+							<p>
+								Publié par
+								<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
+							</p>
 						</td>
-						<td>52.5k</td>
+						<td>{{ d.comments|length }}</td>
 						<td>test</td>
 					</tr>
 				{% else %}

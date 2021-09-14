@@ -5,16 +5,24 @@ namespace App\Controller\Admin;
 use App\Entity\CategoryGroup;
 use App\Form\CategoryGroupType;
 use App\Repository\CategoryGroupRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 /**
- * @Route("/admin/categorie/groupe")
+ * @Route("/admin/groupe")
  */
 class CategoryGroupController extends AbstractController
 {
+    private $manager;
+
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/", name="category_group_index")
      */
@@ -30,20 +38,16 @@ class CategoryGroupController extends AbstractController
      */
     public function new(Request $request): Response
     {
-        $categoryGroup = new CategoryGroup();
-        $form = $this->createForm(CategoryGroupType::class, $categoryGroup);
-        $form->handleRequest($request);
+        $form = $this->createForm(CategoryGroupType::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($categoryGroup);
-            $entityManager->flush();
+            $this->manager->persist($form->getData());
+            $this->manager->flush();
 
             return $this->redirectToRoute('category_group_index');
         }
 
         return $this->renderForm('admin/category_group/new.html.twig', [
-            'category_group' => $categoryGroup,
             'form' => $form,
         ]);
     }
@@ -66,7 +70,7 @@ class CategoryGroupController extends AbstractController
         $form = $this->createForm(CategoryGroupType::class, $categoryGroup)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->manager->flush();
 
             return $this->redirectToRoute('category_group_index');
         }
@@ -83,9 +87,8 @@ class CategoryGroupController extends AbstractController
     public function delete(Request $request, CategoryGroup $categoryGroup): Response
     {
         if ($this->isCsrfTokenValid('delete' . $categoryGroup->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($categoryGroup);
-            $entityManager->flush();
+            $this->manager->remove($categoryGroup);
+            $this->manager->flush();
         }
 
         return $this->redirectToRoute('category_group_index');

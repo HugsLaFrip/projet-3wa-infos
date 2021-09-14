@@ -33,6 +33,11 @@ img {
     visibility: hidden;
 }
 
+.presentation {
+    text-align: center;
+    color: white;
+}
+
 /* Class used for flash messages */
 .flash {
     width: 90%;
@@ -217,8 +222,7 @@ nav a {
     left: 0;
     right: 0;
     bottom: 0;
-    background-image: url("/assets/img/background.jpg");
-    background-repeat: repeat;
+    background: linear-gradient(190deg, rgba(255,255,255,1) 40%, rgba(0,156,237,1) 100%);
     z-index: -10;
 }
 
@@ -385,6 +389,10 @@ table .buttons {
     margin: 4rem auto 2rem;
 }
 
+.table p {
+    margin: 0;
+}
+
 .table thead {
     font-size: 2rem;
     background-color: rgb(11, 145, 223);
@@ -398,6 +406,10 @@ table .buttons {
 
 .table tbody tr a {
     color: black;
+}
+
+.table tbody tr a:first-child {
+    font-size: 2rem;
 }
 
 .table tbody tr td:first-child {
@@ -437,4 +449,26 @@ th, td {
 
 .table_responsive tr:nth-child(even) th {
     border-right: 1px solid white;
+}
+
+
+/*-----------------------------
+---------  Account  -----------
+-----------------------------*/
+
+.account {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    color: white;
+    font-size: 1.8rem;
+}
+
+.account img {
+    width: 250px;
+}
+
+.account .infos th {
+    text-align: right;
+    font-weight: bold;
 }

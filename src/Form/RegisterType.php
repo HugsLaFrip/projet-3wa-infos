@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -44,6 +45,13 @@ class RegisterType extends AbstractType
                     'class' => 'form_input',
                     'placeholder' => 'Veuillez saisir un mot de passe'
                 ]
+            ])
+            ->add('_avatar', FileType::class, [
+                'label' => 'Avatar',
+                'mapped' => false,
+                'required' => false,
+                'row_attr' => ['class' => 'form_row'],
+                'attr' => ['class' => 'form_input']
             ]);
     }
 

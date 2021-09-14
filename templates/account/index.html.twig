@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<h2>{{ user.pseudo }}</h2>
+
+		<div class="account">
+			<table class="infos">
+				<tr>
+					<th>Pseudo :</th>
+					<td>{{ user.pseudo }}</td>
+				</tr>
+				<tr>
+					<th>Mail :</th>
+					<td>{{ user.email }}</td>
+				</tr>
+				<tr>
+					<th>Membre depuis :</th>
+					<td>{{ user.createdAt|date('d/m/Y') }}</td>
+				</tr>
+				<tr>
+					<th>Discussion :</th>
+					<td>{{ user.discussions|length }}</td>
+				</tr>
+				<tr>
+					<th>Commentaire :</th>
+					<td>{{ user.comments|length }}</td>
+				</tr>
+			</table>
+			<img src="/assets/img/{{ user.avatar }}" width="250" alt="avatar">
+		</div>
+		{% if app.user and app.user.pseudo is same as user.pseudo %}
+			<div class="buttons">
+				<a href="{{ path('account_edit', {'pseudo': user.pseudo}) }}" class="btn btn_submit">Modifier mon compte</a>
+			</div>
+		{% endif %}
+	</div>
+
+{% endblock %}

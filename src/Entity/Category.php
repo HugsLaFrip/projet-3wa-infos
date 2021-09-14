@@ -53,7 +53,9 @@ class Category
     {
         // Replace all non alphanumeric character or dash by a dash, then remove all dash at start or end
         // Finally, lower all character
-        $this->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->name), '-'));
+        if (!$this->slug) {
+            $this->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->name), '-'));
+        }
     }
 
     public function getId(): ?int
@@ -125,5 +127,10 @@ class Category
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }

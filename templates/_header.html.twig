@@ -16,8 +16,12 @@
 		<nav id="nav">
 			<a href="">Béééé</a>
 			<a href="">Céééé</a>
+			{% if is_granted('ROLE_ADMIN') %}
+				<a href="{{ path('admin_dashboard') }}">Administration</a>
+			{% endif %}
+
 			{% if app.user %}
-				<a href="">Mon compte</a>
+				<a href="{{ path('account', {'pseudo': app.user.pseudo}) }}">Mon compte</a>
 				<a href="{{ path('security_logout') }}">Se déconnecter</a>
 			{% else %}
 				<a href="{{ path('security_register') }}">Créer son compte</a>

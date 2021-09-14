@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\Category;
 use App\Form\CategoryType;
 use App\Repository\CategoryRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -15,6 +16,13 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class CategoryController extends AbstractController
 {
+    private $manager;
+
+    public function __construct(EntityManagerInterface $manager)
+    {
+        $this->manager = $manager;
+    }
+
     /**
      * @Route("/", name="category_index", methods={"GET"})
      */
@@ -26,41 +34,36 @@ class CategoryController extends AbstractController
     }
 
     /**
-     * @Route("/creer", name="category_new", methods={"GET","POST"})
+     * @Route("/creer", name="category_new")
      */
     public function new(Request $request): Response
     {
-        $category = new Category();
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
+        $form = $this->createForm(CategoryType::class)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($category);
-            $entityManager->flush();
+            $this->manager->persist($form->getData());
+            $this->manager->flush();
 
-            return $this->redirectToRoute('category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('category_index');
         }
 
         return $this->renderForm('admin/category/new.html.twig', [
-            'category' => $category,
             'form' => $form,
             'button_label' => 'Créer une nouvelle catégorie'
         ]);
     }
 
     /**
-     * @Route("/{id}/modifier", name="category_edit", methods={"GET","POST"})
+     * @Route("/{id}/modifier", name="category_edit")
      */
     public function edit(Request $request, Category $category): Response
     {
-        $form = $this->createForm(CategoryType::class, $category);
-        $form->handleRequest($request);
+        $form = $this->createForm(CategoryType::class, $category)->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+            $this->manager->flush();
 
-            return $this->redirectToRoute('category_index', [], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('category_index');
         }
 
         return $this->renderForm('admin/category/edit.html.twig', [
@@ -75,11 +78,10 @@ class CategoryController extends AbstractController
     public function delete(Request $request, Category $category): Response
     {
         if ($this->isCsrfTokenValid('delete' . $category->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($category);
-            $entityManager->flush();
+            $this->manager->remove($category);
+            $this->manager->flush();
         }
 
-        return $this->redirectToRoute('category_index', [], Response::HTTP_SEE_OTHER);
+        return $this->redirectToRoute('category_index');
     }
 }
