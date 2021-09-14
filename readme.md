@@ -3,6 +3,11 @@
 * PHP 7.2.5
 * Composer
 
+## Récupérer le repository
+
+```bash
+git clone https://github.com/HugsLaFrip/projet-3wa-infos.git
+```
 
 ## Installer les dépendances
 
@@ -33,7 +38,7 @@ php bin/console doctrine:fixtures:load
 
 ## Lancement de l'application
 
-Démarrer votre serveur local
+Démarrez votre serveur local
 
 ```bash
 php -S localhost:8000 -t public
