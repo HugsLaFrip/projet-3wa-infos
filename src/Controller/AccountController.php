@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\User;
+use App\Form\AccountType;
 use App\Form\RegisterType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +27,7 @@ class AccountController extends AbstractController
      */
     public function edit(Request $request): Response
     {
-        $form = $this->createForm(RegisterType::class, $this->getUser())->handleRequest($request);
+        $form = $this->createForm(AccountType::class, $this->getUser())->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $avatar = $form->get('_avatar')->getData();
@@ -46,7 +47,7 @@ class AccountController extends AbstractController
 
             $this->addFlash('success', 'Compte modifié avec succès');
 
-            return $this->redirectToRoute('account');
+            return $this->redirectToRoute('account', ['pseudo' => $this->getUser()->getPseudo()]);
         }
 
         return $this->render('account/edit.html.twig', [

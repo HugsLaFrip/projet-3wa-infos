@@ -3,7 +3,7 @@
 {% block body %}
 	<div class="container">
 		<h2>{{ category.name }}</h2>
-		<a href="{{ path('discussion_new', {'categorie': category.slug}) }}" class="btn btn_discussion">Nouvelle discussion</a>
+		<a href="{{ path('discussion_new', {'categorie': category.slug}) }}" class="btn btn_submit">Nouvelle discussion</a>
 		<table class="table">
 			<thead>
 				<tr>
@@ -13,17 +13,31 @@
 				</tr>
 			</thead>
 			<tbody>
-				{% for d in category.discussions %}
+				{% for d in category.discussions|reverse %}
 					<tr>
 						<td>
 							<a href="{{ path('discussion_show', {'categorie': category.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
 							<p>
 								Publié par
 								<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
+								le
+								{{ d.createdAt|date('d/m/Y') }}
 							</p>
 						</td>
 						<td>{{ d.comments|length }}</td>
-						<td>test</td>
+						<td>
+							{% for c in d.comments %}
+								{% if loop.last %}
+									<p>Commentaire de
+										<a href="{{ path('account', {'pseudo': c.user.pseudo}) }}">{{ c.user.pseudo }}</a>
+										le
+										{{ c.createdAt|date('d/m/Y') }}
+									</p>
+								{% endif %}
+							{% else %}
+								<p>Aucune discussion</p>
+							{% endfor %}
+						</td>
 					</tr>
 				{% else %}
 					<tr>

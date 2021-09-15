@@ -2,10 +2,12 @@
 
 {% block body %}
 	<div class="container">
-		<h2>{{ user.pseudo }}</h2>
+		<h2>{{ user.pseudo }}
+			•
+			{{ user.roles[0]|replace({'ROLE_': ''}) }}</h2>
 
 		<div class="account">
-			<table class="infos">
+			<table>
 				<tr>
 					<th>Pseudo :</th>
 					<td>{{ user.pseudo }}</td>

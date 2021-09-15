@@ -1,35 +1,51 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Discussion
-{% endblock %}
-
 {% block body %}
 	<div class="container">
-		<h2>Discussion</h2>
+		<h2>{{ discussion.name }}</h2>
 
-		<table class="table">
-			<tbody>
-				<tr>
-					<th>Titre</th>
-					<td>{{ discussion.name }}</td>
-				</tr>
-				<tr>
-					<th>Contenu</th>
-					<td>{{ discussion.content }}</td>
-				</tr>
-				<tr>
-					<th>Crée le</th>
-					<td>{{ discussion.createdAt ? discussion.createdAt|date('Y-m-d H:i:s') : '' }}</td>
-				</tr>
-				<tr>
-					<th>UpdatedAt</th>
-					<td>{{ discussion.updatedAt ? discussion.updatedAt|date('Y-m-d H:i:s') : '' }}</td>
-				</tr>
-			</tbody>
-		</table>
-
-		{# <a href="{{ path('discussion_edit', {'id': discussion.id}) }}">edit</a> #}
-
-		{# {{ include('discussion/_delete_form.html.twig') }} #}
+		<section>
+			<div class="banner">
+				<div class="author">
+					<img src="/assets/img/{{ discussion.user.avatar }}" alt="avatar" class="avatar">
+					<div class="authors_infos">
+						<a href="{{ path('account', {'pseudo': discussion.user.pseudo}) }}" class="pseudo">{{ discussion.user.pseudo }}</a>
+						<div class="infos">
+							<p>{{ discussion.user.discussions|length + discussion.user.comments|length }}
+								POSTS</p>
+							<p>&nbsp•&nbsp</p>
+							<p>{{ discussion.user.roles[0]|replace({'ROLE_': ''}) }}</p>
+						</div>
+					</div>
+				</div>
+				<p class="date">{{ discussion.createdAt|date('d/m/Y H:i') }}</p>
+			</div>
+			<div class="content">
+				{{ discussion.content|raw }}
+			</div>
+		</section>
+		{% for comment in discussion.comments %}
+			<section>
+				<div class="banner">
+					<div class="author">
+						<img src="/assets/img/{{ comment.user.avatar }}" alt="avatar" class="avatar">
+						<div class="authors_infos">
+							<a href="{{ path('account', {'pseudo': comment.user.pseudo}) }}" class="pseudo">{{ comment.user.pseudo }}</a>
+							<div class="infos">
+								<p>{{ comment.user.discussions|length + comment.user.comments|length }}
+									POSTS</p>
+								<p>&nbsp•&nbsp</p>
+								<p>{{ comment.user.roles[0]|replace({'ROLE_': ''}) }}</p>
+							</div>
+						</div>
+					</div>
+					<p class="date">{{ comment.createdAt|date('d/m/Y H:i') }}</p>
+				</div>
+				<div class="content">
+					{{ comment.content|raw }}
+				</div>
+			</section>
+		{% endfor %}
+		{% include "comment/_form.html.twig" %}
 	</div>
 {% endblock %}

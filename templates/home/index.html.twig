@@ -20,7 +20,20 @@
 								<a href="{{ path('categories', {'slug': c.slug}) }}">{{ c.name }}</a>
 							</td>
 							<td>{{ c.discussions|length }}</td>
-							<td>test</td>
+							<td>
+								{% for d in c.discussions %}
+									{% if loop.last %}
+										<a href="{{ path('discussion_show', {'categorie': c.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
+										<p>Crée par
+											<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
+											le
+											{{ d.user.createdAt|date('d/m/Y') }}
+										</p>
+									{% endif %}
+								{% else %}
+									<p>Aucune discussion</p>
+								{% endfor %}
+							</td>
 						</tr>
 					{% endfor %}
 				</tbody>

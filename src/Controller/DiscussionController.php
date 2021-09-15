@@ -3,10 +3,13 @@
 namespace App\Controller;
 
 use App\Entity\Category;
+use App\Entity\Comment;
 use App\Entity\Discussion;
+use App\Form\CommentType;
 use App\Form\DiscussionType;
 use App\Repository\DiscussionRepository;
 use Doctrine\ORM\EntityManagerInterface;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,6 +38,7 @@ class DiscussionController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $discussion = $form->getData();
+
             $discussion->setCategory($category);
             $discussion->setUser($this->getUser());
 
@@ -51,11 +55,40 @@ class DiscussionController extends AbstractController
 
     /**
      * @Route("/{slug}", name="discussion_show", methods={"GET"})
+     * @ParamConverter("discussion", options={"mapping": {"slug": "slug"}})
      */
-    public function show(Discussion $discussion): Response
+    public function show(Request $request, Discussion $discussion): Response
     {
+        // $form = $this->createForm(CommentType::class)->handleRequest($request);
+        $form = $this->createFormBuilder(null, ['data_class' => Comment::class])
+            ->setAction($this->generateUrl('discussion_show', [
+                'categorie' => $discussion->getCategory()->getSlug(),
+                'slug' => $discussion->getSlug()
+            ]))
+            ->add('content', CKEditorType::class, [
+                'label' => false,
+                'row_attr' => ['class' => 'form_row'],
+                'attr' => ['class' => 'form_input']
+            ])
+            ->getForm();
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $comment = $form->getData();
+
+            $comment->setUser($this->getUser());
+            $comment->setDiscussion($discussion);
+
+            $this->manager->persist($comment);
+            $this->manager->flush();
+
+            return $this->redirectToRoute('discussion_show', ['categorie' => $discussion->getCategory()->getSlug(), 'slug' => $discussion->getSlug()]);
+        }
+
         return $this->render('discussion/show.html.twig', [
             'discussion' => $discussion,
+            'form' => $form->createView()
         ]);
     }
 

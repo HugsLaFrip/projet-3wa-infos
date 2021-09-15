@@ -2,14 +2,13 @@
 
 namespace App\Form;
 
-use App\Entity\Category;
 use App\Entity\Discussion;
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\TextareaType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
+use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class DiscussionType extends AbstractType
 {
@@ -24,7 +23,7 @@ class DiscussionType extends AbstractType
                     'placeholder' => 'Saisissez le titre de la discussion'
                 ]
             ])
-            ->add('content', TextareaType::class, [
+            ->add('content', CKEditorType::class, [
                 'label' => 'Contenu',
                 'row_attr' => ['class' => 'form_row'],
                 'attr' => [
