@@ -13,7 +13,9 @@ git clone https://github.com/HugsLaFrip/projet-3wa-infos.git
 ## Installer les dépendances
 
 ```bash
+cd projet-3wa-infos
 composer install
+php bin/console assets:install
 ```
 
 ## Préparer la base de données

@@ -21,8 +21,9 @@ final class Version20210913141905 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('ALTER TABLE category ADD slug VARCHAR(150) NOT NULL');
-        $this->addSql('ALTER TABLE category ADD CONSTRAINT FK_64C19C1492E5D3C FOREIGN KEY (category_group_id) REFERENCES category_group (id)');
+        $this->addSql('ALTER TABLE category ADD category_group_id int(11) NOT NULL');
         $this->addSql('CREATE INDEX IDX_64C19C1492E5D3C ON category (category_group_id)');
+        $this->addSql('ALTER TABLE category ADD CONSTRAINT FK_64C19C1492E5D3C FOREIGN KEY (category_group_id) REFERENCES category_group (id)');
     }
 
     public function down(Schema $schema): void
