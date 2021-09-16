@@ -46,8 +46,8 @@ php -S localhost:8000 -t public
 ```
 
 Ouvrez votre navigateur favori et saisissez l'URL " localhost:8000 "
-Connectez-vous en tant qu'administrateur à l'aide de ces codes :
 
+Connectez-vous en tant qu'administrateur à l'aide de ces codes :
   * **Email** => admin@admin.fr
   * **Mot de passe** => Admin*12  
 
