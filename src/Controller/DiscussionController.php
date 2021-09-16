@@ -6,7 +6,6 @@ use App\Entity\Category;
 use App\Form\CommentType;
 use App\Entity\Discussion;
 use App\Form\DiscussionType;
-use App\Repository\DiscussionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
