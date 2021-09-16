@@ -46,7 +46,9 @@ class AccountController extends AbstractController
 
             $this->addFlash('success', 'Compte modifié avec succès');
 
-            return $this->redirectToRoute('account', ['pseudo' => $this->getUser()->getPseudo()]);
+            return $this->redirectToRoute('account', [
+                'pseudo' => $this->getUser()->getPseudo()
+            ]);
         }
 
         return $this->render('account/edit.html.twig', [

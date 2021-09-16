@@ -35,7 +35,10 @@ class CommentController extends AbstractController
             $manager->flush();
         }
 
-        return $this->redirectToRoute('discussion_show', ['categorie' => $discussion->getCategory()->getSlug(), 'slug' => $discussion->getSlug()]);
+        return $this->redirectToRoute('discussion_show', [
+            'categorie' => $discussion->getCategory()->getSlug(),
+            'slug' => $discussion->getSlug()
+        ]);
     }
 
     /**
@@ -49,6 +52,9 @@ class CommentController extends AbstractController
         $manager->remove($comment);
         $manager->flush();
 
-        return $this->redirectToRoute('discussion_show', ['categorie' => $comment->getDiscussion()->getCategory()->getSlug(), 'slug' => $comment->getDiscussion()->getSlug()]);
+        return $this->redirectToRoute('discussion_show', [
+            'categorie' => $comment->getDiscussion()->getCategory()->getSlug(),
+            'slug' => $comment->getDiscussion()->getSlug()
+        ]);
     }
 }

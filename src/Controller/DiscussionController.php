@@ -44,7 +44,9 @@ class DiscussionController extends AbstractController
             $this->manager->persist($discussion);
             $this->manager->flush();
 
-            return $this->redirectToRoute('categories', ['slug' => $category->getSlug()]);
+            return $this->redirectToRoute('categories', [
+                'slug' => $category->getSlug()
+            ]);
         }
 
         return $this->renderForm('discussion/new.html.twig', [
