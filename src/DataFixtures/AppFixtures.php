@@ -42,7 +42,7 @@ class AppFixtures extends Fixture
 
                 for ($u = 0; $u < 2; $u++) {
                     $user = new User;
-                    $user->setPseudo($faker->userName);
+                    $user->setPseudo($faker->firstName);
                     $user->setEmail($faker->email);
                     $user->setPassword('Azerty+24');
                     $user->setAvatar('om.png');
