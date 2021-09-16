@@ -3,41 +3,60 @@
 {% block body %}
 	<div class="container">
 		<h2>Le site des passionnés de l'Olympique de Marseille</h2>
-		{% for g in groups %}
-			<h4 class="group">{{ g.name }}</h4>
-			<table class="table">
-				<thead>
-					<tr>
-						<th>Categorie</th>
-						<th>Discussions</th>
-						<th>Plus récent</th>
-					</tr>
-				</thead>
-				<tbody>
-					{% for c in g.categories %}
+		<div id="px768">
+			{% for g in groups %}
+				<h4 class="group">{{ g.name }}</h4>
+				<table class="table">
+					<thead>
 						<tr>
-							<td>
-								<a href="{{ path('categories', {'slug': c.slug}) }}">{{ c.name }}</a>
-							</td>
-							<td>{{ c.discussions|length }}</td>
-							<td>
-								{% for d in c.discussions %}
-									{% if loop.last %}
-										<a href="{{ path('discussion_show', {'categorie': c.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
-										<p>Crée par
-											<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
-											le
-											{{ d.user.createdAt|date('d/m/Y') }}
-										</p>
-									{% endif %}
-								{% else %}
-									<p>Aucune discussion</p>
-								{% endfor %}
-							</td>
+							<th>Categorie</th>
+							<th>Discussions</th>
+							<th>Plus récent</th>
 						</tr>
+					</thead>
+					<tbody>
+						{% for c in g.categories %}
+							<tr>
+								<td>
+									<a href="{{ path('categories', {'slug': c.slug}) }}">{{ c.name }}</a>
+								</td>
+								<td>{{ c.discussions|length }}</td>
+								<td>
+									{% for d in c.discussions %}
+										{% if loop.last %}
+											<a href="{{ path('discussion_show', {'categorie': c.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
+											<p>Crée par
+												<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
+												le
+												{{ d.user.createdAt|date('d/m/Y') }}
+											</p>
+										{% endif %}
+									{% else %}
+										<p>Aucune discussion</p>
+									{% endfor %}
+								</td>
+							</tr>
+						{% endfor %}
+					</tbody>
+				</table>
+			{% endfor %}
+		</div>
+		<div id="px300">
+			{% for g in groups %}
+				<ul class="display_mobile">
+					<li>
+						<h4>{{ g.name }}</h4>
+					</li>
+					{% for c in g.categories %}
+						<li>
+							<a href="{{ path('categories', {'slug': c.slug}) }}">{{ c.name }}</a>
+							<p>{{ c.discussions|length }}
+								<i class="fas fa-comment-alt"></i>
+							</p>
+						</li>
 					{% endfor %}
-				</tbody>
-			</table>
-		{% endfor %}
+				</ul>
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}

@@ -3,48 +3,70 @@
 {% block body %}
 	<div class="container">
 		<h2>{{ category.name }}</h2>
-		<a href="{{ path('discussion_new', {'categorie': category.slug}) }}" class="btn btn_submit">Nouvelle discussion</a>
-		<table class="table">
-			<thead>
-				<tr>
-					<th>Discussion</th>
-					<th>Commentaires</th>
-					<th>Plus récent</th>
-				</tr>
-			</thead>
-			<tbody>
-				{% for d in category.discussions|reverse %}
+		<div class="buttons">
+			<a href="{{ path('discussion_new', {'categorie': category.slug}) }}" class="btn btn_submit">Nouvelle discussion</a>
+		</div>
+		<div id="px768">
+			<table class="table">
+				<thead>
 					<tr>
-						<td>
-							<a href="{{ path('discussion_show', {'categorie': category.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
-							<p>
-								Publié par
-								<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
-								le
-								{{ d.createdAt|date('d/m/Y') }}
-							</p>
-						</td>
-						<td>{{ d.comments|length }}</td>
-						<td>
-							{% for c in d.comments %}
-								{% if loop.last %}
-									<p>Commentaire de
-										<a href="{{ path('account', {'pseudo': c.user.pseudo}) }}">{{ c.user.pseudo }}</a>
-										le
-										{{ c.createdAt|date('d/m/Y') }}
-									</p>
-								{% endif %}
-							{% else %}
-								<p>Aucune discussion</p>
-							{% endfor %}
-						</td>
+						<th>Discussion</th>
+						<th>Commentaires</th>
+						<th>Plus récent</th>
 					</tr>
-				{% else %}
-					<tr>
-						<td colspan="3">Aucune discussion trouvé</td>
-					</tr>
-				{% endfor %}
-			</tbody>
-		</table>
+				</thead>
+				<tbody>
+					{% for d in category.discussions|reverse %}
+						<tr>
+							<td>
+								<a href="{{ path('discussion_show', {'categorie': category.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
+								<p>
+									Publié par
+									<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
+									le
+									{{ d.createdAt|date('d/m/Y') }}
+								</p>
+							</td>
+							<td>{{ d.comments|length }}</td>
+							<td>
+								{% for c in d.comments %}
+									{% if loop.last %}
+										<p>Commentaire de
+											<a href="{{ path('account', {'pseudo': c.user.pseudo}) }}">{{ c.user.pseudo }}</a>
+											le
+											{{ c.createdAt|date('d/m/Y') }}
+										</p>
+									{% endif %}
+								{% else %}
+									<p>Aucune discussion</p>
+								{% endfor %}
+							</td>
+						</tr>
+					{% else %}
+						<tr>
+							<td colspan="3">Aucune discussion trouvé</td>
+						</tr>
+					{% endfor %}
+				</tbody>
+			</table>
+		</div>
+		<div id="px300">
+			{% for d in category.discussions %}
+				<ul class="display_mobile">
+					<li class="li_categ">
+						<a href="{{ path('discussion_show', {'categorie': category.slug, 'slug': d.slug}) }}">{{ d.name }}</a>
+						<p>
+							Publié par
+							<a href="{{ path('account', {'pseudo': d.user.pseudo}) }}">{{ d.user.pseudo }}</a>
+							le
+							{{ d.createdAt|date('d/m/Y') }}
+						</p>
+						<p>{{ d.comments|length }}
+							<i class="fas fa-comment-alt"></i>
+						</p>
+					</li>
+				</ul>
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}

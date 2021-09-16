@@ -186,35 +186,54 @@ nav a {
 ----------------------*/
 
 .nav_admin {
-    display: flex;
-    flex-direction: column;
-    position: fixed;
-    left: 0;
-    top: 50%;
-    padding: 2rem 3rem;
+    background-color: rgb(30, 30, 30);
+    width: 90%;
+    margin: auto;
+    border-bottom: 1px solid white;
+    text-align: center;
 }
 
-.nav_admin a {
-    margin-right: 0;
-    margin-bottom: 2rem;
+@media screen and (min-width: 768px) {
+    .nav_admin {
+        width: 80%;
+    }
 }
 
-.nav_admin a:last-child {
-    margin-bottom: 0;
+@media screen and (min-width: 1024px) {
+    .nav_admin {
+        display: flex;
+        flex-direction: column;
+        position: fixed;
+        left: 0;
+        top: 50%;
+        width: inherit;
+        border-bottom: inherit;
+        padding: 2rem 3rem;
+    }
+    
+    .nav_admin a {
+        margin-right: 0;
+        margin-bottom: 2rem;
+    }
+    
+    .nav_admin a:last-child {
+        margin-bottom: 0;
+    }
 }
-
+    
 
 /*----------------------
 -----  Home page  ------
 ----------------------*/
 
 .background {
-    position: absolute;
+    position: fixed;
     top: 0;
+    bottom: 0;
     left: 0;
     right: 0;
-    bottom: 0;
     background: linear-gradient(190deg, rgba(255,255,255,1) 40%, rgba(0,156,237,1) 100%);
+    background-size: cover;
     z-index: -10;
 }
 
@@ -222,6 +241,41 @@ nav a {
     font-size: 3rem;
     padding: 1rem;
     color: white;
+}
+
+.display_mobile  {
+    list-style-type: none;
+    color: white;
+    padding: 0;
+}
+
+.display_mobile li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1rem;
+    border-bottom: 1px solid white;
+}
+
+.display_mobile li:first-child {
+    background-color: rgb(11, 145, 223);
+}
+
+.display_mobile li a {
+    color: white;
+}
+
+.display_mobile .li_categ {
+    display: inherit;
+    padding: 0.5rem 1rem;
+}
+
+.li_categ h4 {
+    display: block;
+}
+
+.li_categ a {
+    font-size: 2rem;
 }
 
 /*----------------------
@@ -453,20 +507,27 @@ th, td {
 -----------------------------*/
 
 .account {
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
     color: white;
-    font-size: 1.8rem;
+    text-align: center;
 }
 
 .account img {
     width: 250px;
 }
 
-.account table th {
-    text-align: right;
-    font-weight: bold;
+@media screen and (min-width: 768px) {
+
+    .account {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        font-size: 1.8rem;
+    }
+    
+    .account table th {
+        text-align: right;
+        font-weight: bold;
+    }
 }
 
 
@@ -481,20 +542,18 @@ th, td {
     background-color: rgb(60, 60, 60);
 }
 
-.author {
-    display: flex;
-    justify-content: left;   
-}
-
 .avatar {
     width: 100px;
     height: 100px;
 }
 
 .authors_infos {
-    padding: 0.5rem 2rem;
-    align-self: flex-end;
-    color: white;
+    width: 100%;
+    padding: 1.5rem 2rem;
+}
+
+.infos {
+    display: none;
 }
 
 .pseudo {
@@ -502,19 +561,85 @@ th, td {
     color: white;
 }
 
-.infos {
-    display: flex;
-    justify-content: space-around;
-}
-
 .date {
-    padding: 0.5rem 2rem;
-    color: white;
     align-self: flex-end;
+    color: white;
 }
 
 .content {
+    position: relative;
     min-height: 150px;
     padding: 2rem;
     color: white;
+}
+
+.delete_comment {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background-color: red;
+    color: white;
+    padding: 1rem;
+    border-radius: 10px;
+}
+
+@media screen and (min-width: 768px) {
+    .authors_infos {
+        display: flex;
+        justify-content: space-between;
+        color: white;
+    }
+
+    .infos {
+        display: inherit;
+    }
+    
+    .date {
+        padding: 0.5rem 2rem;
+    }
+}
+
+
+/*-----------------------------
+---------  Champion  ----------
+-----------------------------*/
+
+.champion {
+    color: white;
+}
+
+.champion h4 {
+    text-align: center;
+    font-size: 3rem;
+}
+
+.champion a {
+    color: white;
+    font-size: 2rem;
+}
+
+.champion img {
+    width: 200px;
+    margin: auto;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(11, 145, 223);
+    margin-bottom: 2rem;
+    text-align: center;
+    padding: 2rem 0;
+}
+
+@media screen and (min-width: 768px) {
+    .champion {
+        display: flex;
+    }
+
+    .discussions, .comments {
+        width: 49%;
+        margin: 0 auto;
+        align-self: flex-start;
+    }
 }

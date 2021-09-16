@@ -52,7 +52,7 @@ class Category
     public function prePersist()
     {
         // Replace all non alphanumeric character or dash by a dash, then remove all dash at start or end
-        // Finally, lower all character
+        // Finally, lower all characters
         if (!$this->slug) {
             $this->slug = strtolower(trim(preg_replace('/[^A-Za-z0-9-]+/', '-', $this->name), '-'));
         }

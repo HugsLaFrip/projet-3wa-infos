@@ -1,20 +1,4 @@
 class Menu {
-    // Set header's CSS class based on window width
-    setMenuClass() {
-        if ($(window).width() >= 1024) {
-            $('#menu').addClass('menu_show');
-            $('#open_nav').addClass('hide');
-            $('#close_nav').addClass('hide');
-            $('#nav').removeClass('hide');
-        }
-        else {
-            $('#menu').addClass('menu_hide').removeClass('menu_show');
-            $('#open_nav').removeClass('hide')
-            $('#close_nav').addClass('hide');
-            $('#nav').addClass('hide');
-        }
-    }
-
     // Open menu when clicked -- For mobile version
     openMenu() {
         $('#open_nav').on('click', function () {

@@ -1,4 +1,6 @@
-<form method="post" action="{{ path('discussion_delete', {'id': discussion.id}) }}" onsubmit="return confirm('Are you sure you want to delete this item?');">
-    <input type="hidden" name="_token" value="{{ csrf_token('delete' ~ discussion.id) }}">
-    <button class="btn">Delete</button>
+<form style="text-align: center" method="post" action="{{ path('discussion_delete', {'categorie': discussion.category.slug, 'id': discussion.id}) }}" onsubmit="return confirm('Etes-vous sur de vouloir supprimer cette discussion ?');">
+	<input type="hidden" name="_token" value="{{ csrf_token('delete' ~ discussion.id) }}">
+	<button class="btn btn_delete">
+		<i class="fas fa-trash"></i>
+	</button>
 </form>

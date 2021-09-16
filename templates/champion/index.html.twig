@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<div class="container">
+		<h2>Nos champions du forum</h2>
+		<div class="champion">
+			<div class="discussions">
+				<h4>Top 3 discussions</h4>
+				<div class="top3">
+					{% for d in discussion %}
+						<div class="card">
+							<img src="/assets/img/{{ d.avatar }}" alt="avatar">
+							<a href="{{ path('account', {'pseudo': d.pseudo}) }}">{{ d.pseudo }}</a>
+							<p>
+								<strong>{{ d.nombre_de_discussion }}</strong>
+								discussions</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+			<div class="comments">
+				<h4>Top 3 Commentaires</h4>
+				<div class="top3">
+					{% for c in comment %}
+						<div class="card">
+							<img src="/assets/img/{{ c.avatar }}" alt="avatar">
+							<a href="{{ path('account', {'pseudo': c.pseudo}) }}">{{ c.pseudo }}</a>
+							<p>
+								<strong>{{ c.nombre_de_commentaires }}</strong>
+								commentaires</p>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+
+	</div>
+{% endblock %}

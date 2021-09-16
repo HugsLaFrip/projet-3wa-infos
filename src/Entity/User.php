@@ -86,7 +86,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function prePersist()
     {
         if (!$this->avatar) {
-            $this->avatar = 'avatar.jpg';
+            $this->avatar = 'om.png';
         }
 
         if (!$this->createdAt) {

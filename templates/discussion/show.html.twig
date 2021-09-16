@@ -2,23 +2,23 @@
 
 {% block body %}
 	<div class="container">
-		<h2>{{ discussion.name }}</h2>
+		<h2 class="discussion_title">{{ discussion.name }}</h2>
+		{% if is_granted('ROLE_ADMIN') %}
+			{% include "discussion/_delete_form.html.twig" %}
+		{% endif %}
 
 		<section>
 			<div class="banner">
-				<div class="author">
-					<img src="/assets/img/{{ discussion.user.avatar }}" alt="avatar" class="avatar">
-					<div class="authors_infos">
+				<img src="/assets/img/{{ discussion.user.avatar }}" alt="avatar" class="avatar">
+				<div class="authors_infos">
+					<div>
 						<a href="{{ path('account', {'pseudo': discussion.user.pseudo}) }}" class="pseudo">{{ discussion.user.pseudo }}</a>
-						<div class="infos">
-							<p>{{ discussion.user.discussions|length + discussion.user.comments|length }}
-								POSTS</p>
-							<p>&nbsp•&nbsp</p>
-							<p>{{ discussion.user.roles[0]|replace({'ROLE_': ''}) }}</p>
-						</div>
+						<p class="infos">{{ discussion.user.discussions|length + discussion.user.comments|length }}
+							POSTS •
+							{{ discussion.user.roles[0]|replace({'ROLE_': ''}) }}</p>
 					</div>
+					<p class="date">{{ discussion.createdAt|date('d/m/Y H:i') }}</p>
 				</div>
-				<p class="date">{{ discussion.createdAt|date('d/m/Y H:i') }}</p>
 			</div>
 			<div class="content">
 				{{ discussion.content|raw }}
@@ -27,22 +27,24 @@
 		{% for comment in discussion.comments %}
 			<section>
 				<div class="banner">
-					<div class="author">
-						<img src="/assets/img/{{ comment.user.avatar }}" alt="avatar" class="avatar">
-						<div class="authors_infos">
+					<img src="/assets/img/{{ comment.user.avatar }}" alt="avatar" class="avatar">
+					<div class="authors_infos">
+						<div>
 							<a href="{{ path('account', {'pseudo': comment.user.pseudo}) }}" class="pseudo">{{ comment.user.pseudo }}</a>
-							<div class="infos">
-								<p>{{ comment.user.discussions|length + comment.user.comments|length }}
-									POSTS</p>
-								<p>&nbsp•&nbsp</p>
-								<p>{{ comment.user.roles[0]|replace({'ROLE_': ''}) }}</p>
-							</div>
+							<p class="infos">{{ comment.user.discussions|length + comment.user.comments|length }}
+								POSTS •
+								{{ comment.user.roles[0]|replace({'ROLE_': ''}) }}</p>
 						</div>
+						<p class="date">{{ comment.createdAt|date('d/m/Y H:i') }}</p>
 					</div>
-					<p class="date">{{ comment.createdAt|date('d/m/Y H:i') }}</p>
 				</div>
 				<div class="content">
 					{{ comment.content|raw }}
+					{% if is_granted('ROLE_ADMIN') %}
+						<a href="{{ path('comment_delete', {'id': comment.id}) }}" class="delete_comment">
+							<i class="fas fa-trash"></i>
+						</a>
+					{% endif %}
 				</div>
 			</section>
 		{% endfor %}

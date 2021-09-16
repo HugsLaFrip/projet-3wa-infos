@@ -19,32 +19,21 @@ class DiscussionRepository extends ServiceEntityRepository
         parent::__construct($registry, Discussion::class);
     }
 
-    // /**
-    //  * @return Discussion[] Returns an array of Discussion objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    public function findTop3()
     {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('d.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+        $connection = $this->getEntityManager()->getConnection();
 
-    /*
-    public function findOneBySomeField($value): ?Discussion
-    {
-        return $this->createQueryBuilder('d')
-            ->andWhere('d.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $sql = "SELECT u.pseudo, u.avatar, COUNT(d.id) AS nombre_de_discussion
+                FROM discussion d, user u
+                WHERE d.user_id = u.id
+                GROUP BY d.user_id
+                ORDER BY nombre_de_discussion DESC
+                LIMIT 3";
+
+        $statement = $connection->prepare($sql);
+
+        $statement->executeStatement();
+
+        return $statement->fetchAllAssociative();
     }
-    */
 }

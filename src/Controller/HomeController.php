@@ -15,7 +15,6 @@ class HomeController extends AbstractController
      */
     public function index(CategoryGroupRepository $groupRespository, DiscussionRepository $discussionRepository): Response
     {
-        // dd($discussionRepository->findOneBy([], ['createdAt' => 'DESC']));
         return $this->render('home/index.html.twig', [
             'groups' => $groupRespository->findAll(),
             'last_discussion' => $discussionRepository->findOneBy([], ['createdAt' => 'DESC'])
